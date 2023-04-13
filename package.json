@@ -7,12 +7,12 @@
     "node": ">=16.0.0"
   },
   "scripts": {
-    "start:table": "ts-node scripts/initDatabaseTables.ts",
-    "start:baseGame": "ts-node scripts/initBaseGameDatabase.ts",
-    "start:steamGame": "ts-node scripts/initSteamGameDatabase.ts",
-    "start:steamTag": "ts-node scripts/initSteamTagDatabase.ts",
-    "forever:steamGame": "forever start -m 5 -v -c ts-node scripts/initSteamGameDatabase.ts",
-    "forever:steamTag": "forever start -m 5 -v -c ts-node scripts/initSteamTagDatabase.ts"
+    "start:table": "ts-node dataScripts/initDatabaseTables.ts",
+    "start:baseGame": "ts-node dataScripts/initBaseGameDatabase.ts",
+    "start:steamGame": "ts-node dataScripts/initSteamGameDatabase.ts",
+    "start:steamTag": "ts-node dataScripts/initSteamTagDatabase.ts",
+    "forever:steamGame": "forever start -m 5 -v -c ts-node dataScripts/initSteamGameDatabase.ts",
+    "forever:steamTag": "forever start -m 5 -v -c ts-node dataScripts/initSteamTagDatabase.ts"
   },
   "author": "Bilguun",
   "license": "MIT",
