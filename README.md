@@ -1,6 +1,7 @@
 # Steam-Landscape
 
-Welcome to Steam-Landscape! This public repository provides a database of Steam data, including a list of all games on Steam, detailed information on each game, and tag information for each game. Additionally, we provide basic yearly tag distribution data to help analyze trends over time.
+Welcome to Steam-Landscape!
+This repo provides is public database of Steam data, including a list of all games on Steam, detailed information on each game, and tag information for each game. Additionally, we also have a basic yearly tag distribution data to help analyze trends over a year.
 
 ## Database
 
