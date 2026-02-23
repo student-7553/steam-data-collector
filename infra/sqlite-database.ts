@@ -56,10 +56,10 @@ class SqliteDatabase {
 
   public async getRecentGames(
     offset: number,
-    limit: number
+    limit: number,
   ): Promise<BaseGame[]> {
     const result = await this.db!.all(
-      `SELECT * FROM ${baseDbName} ORDER BY steam_id desc LIMIT ${limit} OFFSET ${offset}`
+      `SELECT * FROM ${baseDbName} ORDER BY steam_id desc LIMIT ${limit} OFFSET ${offset}`,
     );
     return result;
   }
@@ -71,11 +71,11 @@ class SqliteDatabase {
 
   public async getSteamGames(
     size: number,
-    offset: number
+    offset: number,
   ): Promise<SteamApp[]> {
     const results = await this.db!.all(
       `SELECT * FROM ${steamGameDbName} limit ? offset ?`,
-      [size, offset]
+      [size, offset],
     );
     const steamApps = results.map((record) => this.recordToSteamApp(record));
     return steamApps;
@@ -83,12 +83,12 @@ class SqliteDatabase {
 
   public async getSteamGamesFromDateRange(
     from: number,
-    to: number
+    to: number,
   ): Promise<SteamApp[]> {
     const result = await this.db!.all(
       `SELECT * FROM ${steamGameDbName} where releaseDateMill > ? and releaseDateMill < ?`,
       from,
-      to
+      to,
     );
     return result;
   }
@@ -101,7 +101,7 @@ class SqliteDatabase {
   public async getSteamTagsByIds(ids: number[]): Promise<SteamTag[]> {
     const idsString = ids.join(",");
     const results: SteamTagRecord[] = await this.db!.all(
-      `SELECT * FROM ${steamTagDbName} where steam_id IN (${idsString})`
+      `SELECT * FROM ${steamTagDbName} where steam_id IN (${idsString})`,
     );
     const steamTags = results.map((record) => this.recordToSteamTag(record));
     return steamTags;
@@ -116,7 +116,7 @@ class SqliteDatabase {
   public async getSteamAppsByIds(ids: number[]): Promise<SteamApp[]> {
     const idsString = ids.join(",");
     const results: SteamAppRecord[] = await this.db!.all(
-      `SELECT * FROM ${steamGameDbName} where steam_appid IN (${idsString})`
+      `SELECT * FROM ${steamGameDbName} where steam_appid IN (${idsString})`,
     );
 
     const steamApps = results.map((record) => this.recordToSteamApp(record));
@@ -131,7 +131,7 @@ class SqliteDatabase {
   public async insertToDb(dbName: string, values: string[]) {
     const questionMarks = values.map(() => "?");
     const prepedSql = `INSERT INTO '${dbName}' VALUES (${questionMarks.join(
-      ","
+      ",",
     )})`;
     await this.db!.run(prepedSql, values);
   }
@@ -145,7 +145,7 @@ class SqliteDatabase {
 
   public async insertCustomRawData(
     tableName: string,
-    data: object
+    data: object,
   ): Promise<void> {
     const values: string[] = Object.values(data);
     await this.insertToDb(tableName, values);
@@ -169,14 +169,14 @@ class SqliteDatabase {
            id INTEGER PRIMARY KEY,
            steam_id INTEGER,
            igdb_id INTEGER
-         );`
+         );`,
     );
     await this.db.exec(
       `CREATE TABLE IF NOT EXISTS ${steamTagDbName} (
           steam_id INTEGER PRIMARY KEY,
           tag TEXT,
           createdDate INTEGER
-         );`
+         );`,
     );
 
     await this.db.exec(
@@ -190,14 +190,14 @@ class SqliteDatabase {
         priceUSD INTEGER,
         createdAt INTEGER,
         rawJson TEXT
-      );`
+      );`,
     );
 
     await this.db.exec(
       `CREATE TABLE IF NOT EXISTS ${failedSteamGameDbName} (
           steam_id INTEGER PRIMARY KEY,
           createdDate INTEGER
-         );`
+         );`,
     );
   }
 
@@ -211,7 +211,7 @@ class SqliteDatabase {
            gameCount INTEGER,
            recommendationCount INTEGER,
            averageUSDPrice INTEGER
-         );`
+         );`,
     );
   }
 

@@ -17,7 +17,7 @@ export default class DbService {
     while (true) {
       const steamGames = await this.infra.sqliteDatbase.getSteamGames(
         size,
-        offset
+        offset,
       );
       if (!steamGames || steamGames.length === 0) {
         break;

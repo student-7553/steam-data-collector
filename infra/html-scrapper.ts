@@ -11,7 +11,7 @@ class HTML_SCRAPPER {
     if (response.status !== 200) {
       console.error("Failed at scrapeTagsFromAppId / ", response.status);
       throw new Error(
-        "Failed fetch on scrapeTagsFromAppId/" + STEAM_APP_URL + appId
+        "Failed fetch on scrapeTagsFromAppId/" + STEAM_APP_URL + appId,
       );
     }
 

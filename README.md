@@ -1,64 +1,81 @@
 # Steam-Data-Collector
-  
-This repository is designed to make Steam data easily collectablel. The repo already provides some basic steam data, such as full list of all games, detailed information on each game, tag information on each game, and basic yearly tag distribution data. 
+
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
+![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?logo=typescript&logoColor=white)
+
+This repository is designed to make Steam data easily collectible. The repo provides some basic steam data, such as a full list of all games, detailed information on each game, tag information on each game, and basic yearly tag distribution data.
 
 ## Database
 
-The SQLite database located at /database/small.db. 
+The SQLite database is located at `/database/small.db`.
 
-## Data Initialization
+## Getting Started
+
+First, install the dependencies:
+```bash
+npm install
+```
+
+### Data Initialization
 
 If you want to collect data from scratch, this repo provides several scripts to help you. You can use the following scripts to initialize the database:
 
-initDatabaseTables: sets up the database tables
+- `npm run start:table`: Sets up the database tables.
+- `npm run start:baseGame`: Adds all base games to the database.
+- `npm run start:steamGame`: Fetches and adds detailed information about each game.
+- `npm run start:steamTag`: Adds tag information for each game.
 
-initBaseGameDatabase: adds all games to the database
+> [!WARNING]
+> Please note that collecting or scraping all the data from scratch using the Steam API may take some time.
 
-initSteamGameDatabase: adds detailed information about each game
+For continuous background fetching, you can use the forever scripts:
+- `npm run forever:steamGame`
+- `npm run forever:steamTag`
 
-initSteamTagDatabase: adds tag information for each game
+There are also utility scripts in `dataScripts/` and `scripts/` to create yearly tag distributions (e.g., `createYearlyTagDistribution.ts`, `createIndieYearlyTagDistribution.ts`).
 
-Please note that collecting/scraping all the data from scratch may take some time.
+## Formatting
+
+To format the codebase with Prettier, run:
+```bash
+npm run format
+```
 
 ## Personal Insight
 
-Tags that performed well compared to their peer:
+Based on the collected data, here are some interesting insights regarding game tags:
 
+### High-Performing Tags
+These tags generally performed better compared to their peers:
 - Open World, Sandbox, Crafting, Co-op, Open World Survival Craft
-
 - Beautiful (aka High Quality)
 
-Popular tags that didn't perform well as their peers:
-
+### Underperforming Popular Tags
+These are popular tags that didn't perform as well as their peers:
 - Free to Play
-
 - Linear
-
 - Tabletop
-
 - Logic
-
 - Conversation
 
-Tags that should be avoid like the plague:
-
+### Tags to Avoid
+These tags historically show poor performance:
 - 2D Fighter
-
 - Abstract
 
-Some sample data (sorted: recommendation total desc)
+## Sample Data
 
-Tag | Game count | Recommendation total | averageUSDPrice
---- | --- | --- | ---
-Indie |	10408 |	1381790 |	600.0608186010776
-Single player |	7337 |	1248329 |	547.4368270410259
-Action |	4365 |	949580 |	531.1567010309277
-Early Access |	1354 |	745438 |	619.7570162481529
-Adventure |	4296 |	725749 |	571.9266759776539
-Simulation |	2102 |	688972 |	711.016650808754
-Open World |	588 |	598448 |	669.1139455782311
-Sandbox |	474 |	579156 |	771.4894514767934
-First-Person |	1215 |	535331 |	547.6740740740735
-Strategy |	2746 |	529994 |	808.6241806263656
+*(Sorted: recommendation total desc)*
 
-
+| Tag | Game count | Recommendation total | Average USD Price |
+| --- | --- | --- | --- |
+| Indie | 10408 | 1381790 | $6.00 |
+| Single player | 7337 | 1248329 | $5.47 |
+| Action | 4365 | 949580 | $5.31 |
+| Early Access | 1354 | 745438 | $6.20 |
+| Adventure | 4296 | 725749 | $5.72 |
+| Simulation | 2102 | 688972 | $7.11 |
+| Open World | 588 | 598448 | $6.69 |
+| Sandbox | 474 | 579156 | $7.71 |
+| First-Person | 1215 | 535331 | $5.48 |
+| Strategy | 2746 | 529994 | $8.09 |

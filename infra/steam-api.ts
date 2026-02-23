@@ -80,13 +80,13 @@ class STEAM_API {
     try {
       const response = await this.fetchData(
         STEAM_APP_DEFAIL_URL + `?appids=${appId}&cc=us`,
-        "GET"
+        "GET",
       );
 
       const parsedResponse: AppResponse = JSON.parse(response);
 
       const responseData: AppSuccessfulResponseData = Object.values(
-        parsedResponse ? parsedResponse : [{ success: false }]
+        parsedResponse ? parsedResponse : [{ success: false }],
       )[0];
 
       if (responseData.success !== true) {
@@ -164,7 +164,7 @@ class STEAM_API {
   private async fetchData(
     url: string,
     method: "GET" | "POST",
-    body?: string
+    body?: string,
   ): Promise<string> {
     const response = await fetch(url, {
       method: method,

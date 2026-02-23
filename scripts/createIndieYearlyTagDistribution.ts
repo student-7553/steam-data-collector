@@ -19,7 +19,7 @@ interface PreData {
 function mapSingleGame(
   data: { [tag: string]: PreData },
   steamGame: SteamApp,
-  tags: string[]
+  tags: string[],
 ) {
   for (const singleTag of tags) {
     if (!data[singleTag]) {
@@ -46,7 +46,7 @@ function mapSingleGame(
 
 async function mapData(
   steamGames: SteamApp[],
-  mappedTags: { [steam_id: string]: string[] }
+  mappedTags: { [steam_id: string]: string[] },
 ) {
   const data: { [tag: string]: PreData } = {};
   for (const singleSteamGame of steamGames) {
@@ -85,7 +85,7 @@ async function run() {
 
   const steamGames = await infra.sqliteDatbase.getSteamGamesFromDateRange(
     fromDate.getTime(),
-    toDate.getTime()
+    toDate.getTime(),
   );
   const indieSteamGames = steamGames.filter((steamGame) => {
     if (!mappedTags[steamGame.steam_appid]) {

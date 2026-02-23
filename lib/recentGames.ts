@@ -8,7 +8,7 @@ export async function recentGames(offset: number, size: number) {
   await infra.sqliteDatbase.connectDb();
   const steamRecentGames = await infra.sqliteDatbase.getRecentGames(
     offset,
-    size
+    size,
   );
   return steamRecentGames;
 }

@@ -16,13 +16,13 @@ async function initGameDatabase() {
     BaseGame
   >(allSavedBaseGames.map((baseGame) => [baseGame.id, baseGame]));
   const filteredAllSteamGames = allSteamGames.filter(
-    (steamGame) => !mappedAllSavedBaseGames.has(steamGame.appid)
+    (steamGame) => !mappedAllSavedBaseGames.has(steamGame.appid),
   );
 
   const chunkedGames = chunk(filteredAllSteamGames, 10000);
   for (const chunkedGame of chunkedGames) {
     const baseGames = chunkedGame.map((appList) =>
-      steamService.createBaseGame(appList)
+      steamService.createBaseGame(appList),
     );
     await dbService.insertAllBaseGames(baseGames);
   }

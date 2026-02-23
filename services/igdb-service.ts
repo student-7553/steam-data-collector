@@ -13,7 +13,7 @@ export default class IgdbService {
   }
 
   async getSteamWebsiteFromWebsiteIds(
-    websites: number[]
+    websites: number[],
   ): Promise<IGDB_website[]> {
     const ids = websites.join(",");
     const requestBody = `  
@@ -24,7 +24,7 @@ export default class IgdbService {
     const gameWebsites: IGDB_website[] = await this.getAllWebsites(requestBody);
 
     return gameWebsites.filter(
-      (gameWebsite) => gameWebsite.category === STEAM_WEBSITE_CATEGORY
+      (gameWebsite) => gameWebsite.category === STEAM_WEBSITE_CATEGORY,
     );
   }
 
@@ -43,9 +43,8 @@ export default class IgdbService {
     let offset = 0;
     while (true) {
       const mergedBody = body + `limit ${MAX_LIMIT};offset ${offset};`;
-      const gamesBatch: IGDB_Game[] = await this.infra.igdbApi.getGames(
-        mergedBody
-      );
+      const gamesBatch: IGDB_Game[] =
+        await this.infra.igdbApi.getGames(mergedBody);
       games = games.concat(gamesBatch);
       if (!body || body.length !== MAX_LIMIT) {
         break;

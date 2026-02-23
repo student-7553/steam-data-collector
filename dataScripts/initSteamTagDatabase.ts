@@ -14,7 +14,7 @@ const currentDate = new Date();
 
 async function initSteamTagDatabase(
   baseGames: BaseGame[],
-  hardReset: boolean = false
+  hardReset: boolean = false,
 ) {
   const { steamService } = services;
   await infra.sqliteDatbase.connectDb();
@@ -49,7 +49,7 @@ async function initSteamTagDatabase(
           } catch (error) {
             reject(error);
           }
-        }
+        },
       );
     });
 
@@ -85,7 +85,7 @@ async function initSteamTagDatabase(
 
 function checkIfAlreadyInit(
   steamId: number,
-  mappedSteamTags: Map<number, SteamTag>
+  mappedSteamTags: Map<number, SteamTag>,
 ) {
   if (mappedSteamTags.has(steamId)) {
     const steamTag = mappedSteamTags.get(steamId)!;

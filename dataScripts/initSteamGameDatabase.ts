@@ -37,7 +37,7 @@ async function initSteamGameDatabase(baseGames: BaseGame[]) {
       return !checkIfAlreadyInit(
         game.steam_id,
         mappedSteamGame,
-        mappedFailedSteamGame
+        mappedFailedSteamGame,
       );
     });
     const chunkedGames = chunk(filteredBaseGames, STEAM_API_PARALLEL_REQUESTS);
@@ -73,7 +73,7 @@ async function initSteamGameDatabase(baseGames: BaseGame[]) {
 function checkIfAlreadyInit(
   steamId: number,
   mappedSteamGame: Map<number, SteamApp>,
-  mappedFailedGame: Map<number, FailedSteamGame>
+  mappedFailedGame: Map<number, FailedSteamGame>,
 ) {
   if (mappedSteamGame.has(steamId)) {
     const steamGame = mappedSteamGame.get(steamId)!;
@@ -86,7 +86,7 @@ function checkIfAlreadyInit(
     const failedSteamGame = mappedFailedGame.get(steamId)!;
     const staleDate = addDays(
       new Date(failedSteamGame.createdDate),
-      DAYS_TILL_STALE
+      DAYS_TILL_STALE,
     );
     if (isBefore(currentDate, staleDate)) {
       return true;
